@@ -159,7 +159,7 @@ export function TraceLetter({ letter, tool }: { letter: LetterSpec; tool: PaintT
               strokeLinecap="round"
             />
             {/* traced progress */}
-            {stroke && stroke.length > 0 && (
+            {!fill && stroke && stroke.length > 0 && (
               <path
                 d={d}
                 fill="none"
