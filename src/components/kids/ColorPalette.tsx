@@ -31,7 +31,7 @@ export function ColorPalette({ tool, onChange }: Props) {
             aria-pressed={active}
             onClick={() => onChange({ kind: "color", crayon })}
             className={`size-14 rounded-full border-4 border-card shadow-swatch transition-transform focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring sm:size-16 ${
-              active ? "scale-115 ring-4 ring-primary" : "hover:scale-110 active:scale-95"
+              active ? "scale-110 ring-4 ring-primary" : "hover:scale-110 active:scale-95"
             }`}
             style={{ backgroundColor: crayon.value }}
           />
