@@ -14,7 +14,7 @@ function angle(a: Point, b: Point) {
   return (Math.atan2(b.y - a.y, b.x - a.x) * 180) / Math.PI;
 }
 
-export function TraceLetter({ letter, tool }: { letter: LetterSpec; tool: PaintTool }) {
+export function TraceLetter({ letter, tool, onComplete }: { letter: LetterSpec; tool: PaintTool; onComplete?: (color: string) => void }) {
   const svgRef = useRef<SVGSVGElement | null>(null);
   const pathRefs = useRef<Array<SVGPathElement | null>>([]);
   const drawing = useRef(false);
@@ -23,6 +23,10 @@ export function TraceLetter({ letter, tool }: { letter: LetterSpec; tool: PaintT
   const [progress, setProgress] = useState<number[]>(() => letter.strokes.map(() => 0));
   const [fill, setFill] = useState<string | null>(null);
   const [paint, setPaint] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (fill) onComplete?.(fill);
+  }, [fill, onComplete]);
 
   useEffect(() => {
     const measured: StrokeData[] = letter.strokes.map((_, i) => {
