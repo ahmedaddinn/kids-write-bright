@@ -44,11 +44,14 @@ function TracingPage() {
         <div className="flex items-start justify-between gap-3">
           <NavButtons />
 
-          <h1 className="mx-auto flex items-center gap-2 rounded-full bg-primary px-4 py-2 text-center text-base font-extrabold text-primary-foreground shadow-swatch sm:gap-4 sm:px-8 sm:py-3 sm:text-2xl">
-            <Star className="size-6 shrink-0 fill-kid-yellow text-kid-yellow sm:size-8" />
-            <span>إتّبِع الأسْهُم وَ أكْمل كِتَابَة الحَرْف</span>
-            <Star className="size-6 shrink-0 fill-kid-yellow text-kid-yellow sm:size-8" />
+          <h1 className="mx-auto flex items-center gap-2 rounded-full border-[3px] border-card bg-[linear-gradient(180deg,color-mix(in_oklab,var(--primary)_78%,white)_0%,var(--primary)_45%,color-mix(in_oklab,var(--primary)_80%,black)_100%)] px-4 py-2 text-center text-base font-extrabold text-primary-foreground shadow-swatch ring-2 ring-primary sm:gap-4 sm:px-10 sm:py-3 sm:text-2xl">
+            <Star className="size-6 shrink-0 fill-kid-yellow stroke-[1.5] text-primary drop-shadow-sm sm:size-9" />
+            <span className="drop-shadow-[0_2px_0_color-mix(in_oklab,var(--primary)_60%,black)]">
+              إتّبِع الأسْهُم وَ أكْمل كِتَابَة الحَرْف
+            </span>
+            <Star className="size-6 shrink-0 fill-kid-yellow stroke-[1.5] text-primary drop-shadow-sm sm:size-9" />
           </h1>
+
 
           <div className="hidden w-20 shrink-0 sm:block" aria-hidden="true" />
         </div>
