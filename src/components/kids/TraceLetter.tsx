@@ -124,7 +124,6 @@ export function TraceLetter({ letter, tool }: { letter: LetterSpec; tool: PaintT
         const stroke = data[i];
         const ratio = stroke && stroke.points.length > 1 ? (progress[i] ?? 0) / (stroke.points.length - 1) : 0;
         const color = fill ?? paint;
-        const inkColor = color ? `color-mix(in oklab, ${color}, black 22%)` : "var(--card)";
         return (
           <g key={`tube-${i}`}>
             {/* black outline of the tube */}
@@ -150,7 +149,7 @@ export function TraceLetter({ letter, tool }: { letter: LetterSpec; tool: PaintT
               <path
                 d={d}
                 fill="none"
-                stroke={inkColor}
+                stroke={color}
                 strokeWidth={46}
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -168,18 +167,20 @@ export function TraceLetter({ letter, tool }: { letter: LetterSpec; tool: PaintT
         const ratio = stroke ? (progress[i] ?? 0) / (stroke.points.length - 1) : 0;
         return (
           <g key={`guide-${i}`}>
-            {/* dashed guide line */}
-            <path
-              ref={(el) => {
-                pathRefs.current[i] = el;
-              }}
-              d={d}
-              fill="none"
-              stroke="oklch(0.18 0 0)"
-              strokeWidth={3}
-              strokeDasharray="12 12"
-              strokeLinecap="round"
-            />
+            {/* dashed guide line — hidden once the letter is fully filled */}
+            {!fill && (
+              <path
+                ref={(el) => {
+                  pathRefs.current[i] = el;
+                }}
+                d={d}
+                fill="none"
+                stroke="oklch(0.18 0 0)"
+                strokeWidth={3}
+                strokeDasharray="12 12"
+                strokeLinecap="round"
+              />
+            )}
             {/* traced progress */}
             {!fill && !paint && stroke && stroke.length > 0 && (
               <path
@@ -194,8 +195,8 @@ export function TraceLetter({ letter, tool }: { letter: LetterSpec; tool: PaintT
             )}
             {/* thick invisible hit area */}
             <path d={d} fill="none" stroke="transparent" strokeWidth={56} strokeLinecap="round" />
-            {/* direction arrows */}
-            {stroke && stroke.points.length > 0 && (
+            {/* direction arrows — hidden once the letter is fully filled */}
+            {!fill && stroke && stroke.points.length > 0 && (
               <>
                 <Chevron point={stroke.points[0]!} rotate={stroke.startAngle} />
                 <Chevron point={stroke.points[stroke.points.length - 1]!} rotate={stroke.endAngle} />
