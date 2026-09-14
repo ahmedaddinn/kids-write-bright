@@ -35,8 +35,7 @@ const LETTER_LIST = [LETTERS["lam"]!, LETTERS["kaf"]!, LETTERS["meem"]!];
 
 function TracingPage() {
   const [tool, setTool] = useState<PaintTool>({ kind: "color", crayon: CRAYONS[0]! });
-  const [letterId, setLetterId] = useState(LETTER_LIST[0]!.id);
-  const letter = LETTER_LIST.find((l) => l.id === letterId) ?? LETTER_LIST[0]!;
+  const letter = LETTER_LIST[0]!;
 
   return (
     <div dir="rtl" className="min-h-dvh bg-primary p-2 font-arabic sm:p-4">
@@ -58,25 +57,6 @@ function TracingPage() {
         {/* Tools */}
         <div className="mt-4 sm:mt-6">
           <ColorPalette tool={tool} onChange={setTool} />
-        </div>
-
-        {/* Letter chooser */}
-        <div className="mt-4 flex items-center justify-center gap-2" role="tablist" aria-label="اختر الحرف">
-          {LETTER_LIST.map((item) => (
-            <button
-              key={item.id}
-              type="button"
-              role="tab"
-              aria-selected={item.id === letter.id}
-              aria-label={`تدرّب على حرف ${item.name}`}
-              onClick={() => setLetterId(item.id)}
-              className={`rounded-full border-2 border-primary px-4 py-1 text-sm font-bold transition-transform hover:scale-105 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring ${
-                item.id === letter.id ? "bg-primary text-primary-foreground" : "text-primary"
-              }`}
-            >
-              {item.name}
-            </button>
-          ))}
         </div>
 
         {/* Worksheet */}
