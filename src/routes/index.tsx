@@ -59,25 +59,6 @@ function TracingPage() {
           <ColorPalette tool={tool} onChange={setTool} />
         </div>
 
-        {/* Letter chooser */}
-        <div className="mt-4 flex items-center justify-center gap-2" role="tablist" aria-label="اختر الحرف">
-          {LETTER_LIST.map((item) => (
-            <button
-              key={item.id}
-              type="button"
-              role="tab"
-              aria-selected={item.id === letter.id}
-              aria-label={`تدرّب على حرف ${item.name}`}
-              onClick={() => setLetterId(item.id)}
-              className={`rounded-full border-2 border-primary px-4 py-1 text-sm font-bold transition-transform hover:scale-105 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring ${
-                item.id === letter.id ? "bg-primary text-primary-foreground" : "text-primary"
-              }`}
-            >
-              {item.name}
-            </button>
-          ))}
-        </div>
-
         {/* Worksheet */}
         <section className="mt-4 mb-16 flex flex-1 items-center justify-center rounded-3xl border-2 border-primary p-4 sm:mt-6 sm:mb-24">
           <div className="flex flex-col items-center justify-center gap-8 py-4 md:flex-row md:gap-14 md:py-8">
