@@ -22,6 +22,7 @@ export function TraceLetter({ letter, tool }: { letter: LetterSpec; tool: PaintT
   const [data, setData] = useState<StrokeData[]>([]);
   const [progress, setProgress] = useState<number[]>(() => letter.strokes.map(() => 0));
   const [fill, setFill] = useState<string | null>(null);
+  const [paint, setPaint] = useState<string | null>(null);
 
   useEffect(() => {
     const measured: StrokeData[] = letter.strokes.map((_, i) => {
