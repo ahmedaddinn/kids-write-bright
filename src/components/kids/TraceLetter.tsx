@@ -36,8 +36,8 @@ export function TraceLetter({ letter, tool }: { letter: LetterSpec; tool: PaintT
       return {
         points,
         length,
-        startAngle: angle(points[0], points[2]),
-        endAngle: angle(points[points.length - 3], points[points.length - 1]),
+        startAngle: angle(points[0]!, points[2]!),
+        endAngle: angle(points[points.length - 3]!, points[points.length - 1]!),
       };
     });
     setData(measured);
@@ -75,13 +75,15 @@ export function TraceLetter({ letter, tool }: { letter: LetterSpec; tool: PaintT
     setProgress((prev) => {
       const active = prev.findIndex((v, i) => v < (data[i]?.points.length ?? 1) - 1);
       if (active === -1) return prev;
-      const pts = data[active].points;
-      let index = prev[active];
-      for (let i = index; i <= Math.min(index + LOOK_AHEAD, pts.length - 1); i++) {
-        const d = Math.hypot(pts[i].x - p.x, pts[i].y - p.y);
+      const pts = data[active]!.points;
+      const start = prev[active] ?? 0;
+      let index = start;
+      for (let i = start; i <= Math.min(start + LOOK_AHEAD, pts.length - 1); i++) {
+        const pt = pts[i]!;
+        const d = Math.hypot(pt.x - p.x, pt.y - p.y);
         if (d < HIT_RADIUS) index = i;
       }
-      if (index === prev[active]) return prev;
+      if (index === start) return prev;
 
       const next = [...prev];
       next[active] = index;
@@ -141,7 +143,7 @@ export function TraceLetter({ letter, tool }: { letter: LetterSpec; tool: PaintT
 
       {letter.strokes.map((d, i) => {
         const stroke = data[i];
-        const ratio = stroke ? progress[i] / (stroke.points.length - 1) : 0;
+        const ratio = stroke ? (progress[i] ?? 0) / (stroke.points.length - 1) : 0;
         return (
           <g key={`guide-${i}`}>
             {/* dashed guide line */}
@@ -173,8 +175,8 @@ export function TraceLetter({ letter, tool }: { letter: LetterSpec; tool: PaintT
             {/* direction arrows */}
             {stroke && stroke.points.length > 0 && (
               <>
-                <Chevron point={stroke.points[0]} rotate={stroke.startAngle} />
-                <Chevron point={stroke.points[stroke.points.length - 1]} rotate={stroke.endAngle} />
+                <Chevron point={stroke.points[0]!} rotate={stroke.startAngle} />
+                <Chevron point={stroke.points[stroke.points.length - 1]!} rotate={stroke.endAngle} />
               </>
             )}
           </g>
