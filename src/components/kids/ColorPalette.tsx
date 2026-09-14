@@ -8,7 +8,7 @@ type Props = {
 
 export function ColorPalette({ tool, onChange }: Props) {
   return (
-    <div className="flex items-center justify-center gap-3 sm:gap-5">
+    <div dir="ltr" className="flex items-center justify-center gap-3 sm:gap-5">
       <button
         type="button"
         aria-label="اختر الممحاة"
