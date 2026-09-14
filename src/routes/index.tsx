@@ -31,7 +31,7 @@ export const Route = createFileRoute("/")({
   component: TracingPage,
 });
 
-const LETTER_LIST = [LETTERS.lam!, LETTERS.kaf!, LETTERS.meem!];
+const LETTER_LIST = [LETTERS["lam"]!, LETTERS["kaf"]!, LETTERS["meem"]!];
 
 function TracingPage() {
   const [tool, setTool] = useState<PaintTool>({ kind: "color", crayon: CRAYONS[0]! });
