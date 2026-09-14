@@ -124,7 +124,6 @@ export function TraceLetter({ letter, tool }: { letter: LetterSpec; tool: PaintT
         const stroke = data[i];
         const ratio = stroke && stroke.points.length > 1 ? (progress[i] ?? 0) / (stroke.points.length - 1) : 0;
         const color = fill ?? paint;
-        const inkColor = color ? `color-mix(in oklab, ${color}, black 22%)` : "var(--card)";
         return (
           <g key={`tube-${i}`}>
             {/* black outline of the tube */}
@@ -150,7 +149,7 @@ export function TraceLetter({ letter, tool }: { letter: LetterSpec; tool: PaintT
               <path
                 d={d}
                 fill="none"
-                stroke={inkColor}
+                stroke={color}
                 strokeWidth={46}
                 strokeLinecap="round"
                 strokeLinejoin="round"
