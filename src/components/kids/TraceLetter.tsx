@@ -61,9 +61,11 @@ export function TraceLetter({ letter, tool }: { letter: LetterSpec; tool: PaintT
     e.currentTarget.setPointerCapture?.(e.pointerId);
     if (tool.kind === "eraser") {
       setFill(null);
+      setPaint(null);
       reset();
       return;
     }
+    setPaint(tool.crayon.value);
     drawing.current = true;
     advance(e.clientX, e.clientY);
   };
