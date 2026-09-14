@@ -25,6 +25,10 @@ export function TraceLetter({ letter, tool, onComplete }: { letter: LetterSpec; 
   const [paint, setPaint] = useState<string | null>(null);
 
   useEffect(() => {
+    if (fill) onComplete?.(fill);
+  }, [fill, onComplete]);
+
+  useEffect(() => {
     const measured: StrokeData[] = letter.strokes.map((_, i) => {
       const el = pathRefs.current[i];
       if (!el) return { points: [], length: 0, startAngle: 0, endAngle: 0 };
