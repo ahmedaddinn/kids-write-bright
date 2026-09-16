@@ -51,9 +51,19 @@ function TracingPage() {
     setDone((prev) => (prev.includes(slot) ? prev : [...prev, slot]));
   }, []);
 
+  const [party, setParty] = useState(false);
+
   useEffect(() => {
     setDone([]);
+    setParty(false);
   }, [letterId]);
+
+  useEffect(() => {
+    if (done.length < 3) return;
+    setParty(true);
+    const t = setTimeout(() => setParty(false), 3000);
+    return () => clearTimeout(t);
+  }, [done.length]);
 
 
   return (
