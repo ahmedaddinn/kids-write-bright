@@ -70,14 +70,46 @@ function TracingPage() {
           <ColorPalette tool={tool} onChange={setTool} />
         </div>
 
+        {/* Letter chooser */}
+        <div role="tablist" aria-label="اختر الحرف" className="mt-4 flex flex-wrap items-center justify-center gap-2 sm:gap-3">
+          {LETTER_LIST.map((item) => {
+            const active = item.id === letter.id;
+            return (
+              <button
+                key={item.id}
+                type="button"
+                role="tab"
+                aria-selected={active}
+                aria-label={`تدرّب على حرف ${item.name}`}
+                onClick={() => setLetterId(item.id)}
+                className={`rounded-full border-4 px-4 py-1 text-lg font-extrabold transition-transform focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring sm:text-xl ${
+                  active
+                    ? "scale-110 border-primary bg-primary text-primary-foreground shadow-swatch"
+                    : "border-primary bg-card text-primary hover:scale-105 active:scale-95"
+                }`}
+              >
+                {item.name}
+              </button>
+            );
+          })}
+        </div>
+
         {/* Worksheet */}
         <section className="mt-4 mb-16 flex flex-1 items-center justify-center rounded-3xl border-2 border-primary p-4 sm:mt-6 sm:mb-24">
           <div className="flex flex-col items-center justify-center gap-8 py-4 md:flex-row md:gap-14 md:py-8">
             {[0, 1, 2].map((slot) => (
-              <TraceLetter key={`${letter.id}-${slot}`} letter={letter} tool={tool} />
+              <TraceLetter
+                key={`${letter.id}-${slot}`}
+                letter={letter}
+                tool={tool}
+                onComplete={() => handleComplete(slot)}
+              />
             ))}
           </div>
         </section>
+
+        {done.length >= 3 && <Celebration />}
+
 
         <img
           src={girlWriting}
