@@ -31,11 +31,19 @@ export const Route = createFileRoute("/")({
   component: TracingPage,
 });
 
-const LETTER_LIST = [LETTERS["lam"]!, LETTERS["kaf"]!, LETTERS["meem"]!];
+const LETTER_LIST = [
+  LETTERS["alif"]!,
+  LETTERS["baa"]!,
+  LETTERS["taa"]!,
+  LETTERS["lam"]!,
+  LETTERS["kaf"]!,
+  LETTERS["meem"]!,
+];
 
 function TracingPage() {
   const [tool, setTool] = useState<PaintTool>({ kind: "color", crayon: CRAYONS[0]! });
-  const letter = LETTER_LIST[0]!;
+  const [letterId, setLetterId] = useState(LETTER_LIST[0]!.id);
+  const letter = LETTER_LIST.find((l) => l.id === letterId) ?? LETTER_LIST[0]!;
 
   return (
     <div dir="rtl" className="min-h-dvh bg-primary p-2 font-arabic sm:p-4">
