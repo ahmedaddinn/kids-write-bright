@@ -20,7 +20,7 @@ export const LETTERS: Record<string, LetterSpec> = {
     viewBox: "0 0 240 340",
     strokes: [
       "M158 44 Q106 32 98 72 Q94 102 138 98 Q168 94 146 120 Q128 142 94 128",
-      "M120 196 L120 306",
+      "M120 186 L120 314",
     ],
   },
   baa: {
