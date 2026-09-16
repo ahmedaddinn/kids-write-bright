@@ -29,6 +29,12 @@ export function TraceLetter({ letter, tool, onComplete }: { letter: LetterSpec; 
   }, [fill, onComplete]);
 
   useEffect(() => {
+    setFill(null);
+    setPaint(null);
+    setProgress(letter.strokes.map(() => 0));
+  }, [letter]);
+
+  useEffect(() => {
     const measured: StrokeData[] = letter.strokes.map((_, i) => {
       const el = pathRefs.current[i];
       if (!el) return { points: [], length: 0, startAngle: 0, endAngle: 0 };
@@ -209,6 +215,22 @@ export function TraceLetter({ letter, tool, onComplete }: { letter: LetterSpec; 
           </g>
         );
       })}
+      {letter.dots?.map((dot, i) => (
+        <g key={`dot-${i}`}>
+          <circle cx={dot.cx} cy={dot.cy} r={20} fill={fill ?? "var(--card)"} stroke="oklch(0.12 0 0)" strokeWidth={6} />
+          {!fill && (
+            <circle
+              cx={dot.cx}
+              cy={dot.cy}
+              r={11}
+              fill="none"
+              stroke="oklch(0.18 0 0)"
+              strokeWidth={3}
+              strokeDasharray="7 7"
+            />
+          )}
+        </g>
+      ))}
     </svg>
   );
 }

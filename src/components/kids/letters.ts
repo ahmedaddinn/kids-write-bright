@@ -9,9 +9,37 @@ export type LetterSpec = {
   viewBox: string;
   /** Ordered guide strokes, from first pen-down to last pen-up. */
   strokes: string[];
+  /** Decorative dots (above or below the letter body). */
+  dots?: Array<{ cx: number; cy: number }>;
 };
 
 export const LETTERS: Record<string, LetterSpec> = {
+  alif: {
+    id: "alif",
+    name: "ألف",
+    viewBox: "0 0 240 340",
+    strokes: [
+      "M158 44 Q106 32 98 72 Q94 102 138 98 Q168 94 146 120 Q128 142 94 128",
+      "M120 186 L120 314",
+    ],
+  },
+  baa: {
+    id: "baa",
+    name: "باء",
+    viewBox: "0 0 240 340",
+    strokes: ["M180 122 Q180 232 120 232 Q60 232 60 122"],
+    dots: [{ cx: 120, cy: 292 }],
+  },
+  taa: {
+    id: "taa",
+    name: "تاء",
+    viewBox: "0 0 240 340",
+    strokes: ["M180 152 Q180 262 120 262 Q60 262 60 152"],
+    dots: [
+      { cx: 98, cy: 96 },
+      { cx: 142, cy: 96 },
+    ],
+  },
   kaf: {
     id: "kaf",
     name: "كاف",

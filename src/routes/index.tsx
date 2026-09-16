@@ -1,7 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Star } from "lucide-react";
 
+import { Celebration } from "@/components/kids/Celebration";
 import { ColorPalette } from "@/components/kids/ColorPalette";
 import { NavButtons } from "@/components/kids/NavButtons";
 import { TraceLetter } from "@/components/kids/TraceLetter";
@@ -31,11 +32,39 @@ export const Route = createFileRoute("/")({
   component: TracingPage,
 });
 
-const LETTER_LIST = [LETTERS["lam"]!, LETTERS["kaf"]!, LETTERS["meem"]!];
+const LETTER_LIST = [
+  LETTERS["alif"]!,
+  LETTERS["baa"]!,
+  LETTERS["taa"]!,
+  LETTERS["lam"]!,
+  LETTERS["kaf"]!,
+  LETTERS["meem"]!,
+];
 
 function TracingPage() {
   const [tool, setTool] = useState<PaintTool>({ kind: "color", crayon: CRAYONS[0]! });
-  const letter = LETTER_LIST[0]!;
+  const [letterId, setLetterId] = useState(LETTER_LIST[0]!.id);
+  const letter = LETTER_LIST.find((l) => l.id === letterId) ?? LETTER_LIST[0]!;
+  const [done, setDone] = useState<number[]>([]);
+
+  const handleComplete = useCallback((slot: number) => {
+    setDone((prev) => (prev.includes(slot) ? prev : [...prev, slot]));
+  }, []);
+
+  const [party, setParty] = useState(false);
+
+  useEffect(() => {
+    setDone([]);
+    setParty(false);
+  }, [letterId]);
+
+  useEffect(() => {
+    if (done.length < 3) return;
+    setParty(true);
+    const t = setTimeout(() => setParty(false), 3000);
+    return () => clearTimeout(t);
+  }, [done.length]);
+
 
   return (
     <div dir="rtl" className="min-h-dvh bg-primary p-2 font-arabic sm:p-4">
@@ -62,14 +91,46 @@ function TracingPage() {
           <ColorPalette tool={tool} onChange={setTool} />
         </div>
 
+        {/* Letter chooser */}
+        <div role="tablist" aria-label="اختر الحرف" className="mt-4 flex flex-wrap items-center justify-center gap-2 sm:gap-3">
+          {LETTER_LIST.map((item) => {
+            const active = item.id === letter.id;
+            return (
+              <button
+                key={item.id}
+                type="button"
+                role="tab"
+                aria-selected={active}
+                aria-label={`تدرّب على حرف ${item.name}`}
+                onClick={() => setLetterId(item.id)}
+                className={`rounded-full border-4 px-4 py-1 text-lg font-extrabold transition-transform focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring sm:text-xl ${
+                  active
+                    ? "scale-110 border-primary bg-primary text-primary-foreground shadow-swatch"
+                    : "border-primary bg-card text-primary hover:scale-105 active:scale-95"
+                }`}
+              >
+                {item.name}
+              </button>
+            );
+          })}
+        </div>
+
         {/* Worksheet */}
         <section className="mt-4 mb-16 flex flex-1 items-center justify-center rounded-3xl border-2 border-primary p-4 sm:mt-6 sm:mb-24">
           <div className="flex flex-col items-center justify-center gap-8 py-4 md:flex-row md:gap-14 md:py-8">
             {[0, 1, 2].map((slot) => (
-              <TraceLetter key={`${letter.id}-${slot}`} letter={letter} tool={tool} />
+              <TraceLetter
+                key={`${letter.id}-${slot}`}
+                letter={letter}
+                tool={tool}
+                onComplete={() => handleComplete(slot)}
+              />
             ))}
           </div>
         </section>
+
+        {party && <Celebration />}
+
 
         <img
           src={girlWriting}
