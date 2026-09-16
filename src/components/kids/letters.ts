@@ -9,6 +9,8 @@ export type LetterSpec = {
   viewBox: string;
   /** Ordered guide strokes, from first pen-down to last pen-up. */
   strokes: string[];
+  /** Optional per-stroke tube thickness (defaults to 46). */
+  widths?: number[];
   /** Decorative dots (above or below the letter body). */
   dots?: Array<{ cx: number; cy: number }>;
 };
@@ -19,9 +21,14 @@ export const LETTERS: Record<string, LetterSpec> = {
     name: "ألف",
     viewBox: "0 0 240 340",
     strokes: [
-      "M158 44 Q106 32 98 72 Q94 102 138 98 Q168 94 146 120 Q128 142 94 128",
-      "M120 186 L120 314",
+      // hamza: small curl from the top-right, sweeping left then back down
+      "M126 30 C 96 16, 58 34, 70 60 C 78 76, 104 74, 106 62 C 108 50, 122 56, 116 72",
+      // hamza base: short bar running to the left
+      "M128 86 L78 90",
+      // the long slightly slanted stem, drawn top to bottom
+      "M104 130 L118 300",
     ],
+    widths: [26, 26, 46],
   },
   baa: {
     id: "baa",
