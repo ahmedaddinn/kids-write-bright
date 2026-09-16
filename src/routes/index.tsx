@@ -45,6 +45,16 @@ function TracingPage() {
   const [tool, setTool] = useState<PaintTool>({ kind: "color", crayon: CRAYONS[0]! });
   const [letterId, setLetterId] = useState(LETTER_LIST[0]!.id);
   const letter = LETTER_LIST.find((l) => l.id === letterId) ?? LETTER_LIST[0]!;
+  const [done, setDone] = useState<number[]>([]);
+
+  const handleComplete = useCallback((slot: number) => {
+    setDone((prev) => (prev.includes(slot) ? prev : [...prev, slot]));
+  }, []);
+
+  useEffect(() => {
+    setDone([]);
+  }, [letterId]);
+
 
   return (
     <div dir="rtl" className="min-h-dvh bg-primary p-2 font-arabic sm:p-4">
