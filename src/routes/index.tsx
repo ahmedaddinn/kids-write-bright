@@ -1,7 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Star } from "lucide-react";
 
+import { Celebration } from "@/components/kids/Celebration";
 import { ColorPalette } from "@/components/kids/ColorPalette";
 import { NavButtons } from "@/components/kids/NavButtons";
 import { TraceLetter } from "@/components/kids/TraceLetter";
