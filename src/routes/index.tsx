@@ -129,7 +129,7 @@ function TracingPage() {
           </div>
         </section>
 
-        {done.length >= 3 && <Celebration />}
+        {party && <Celebration />}
 
 
         <img
