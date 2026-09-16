@@ -134,6 +134,7 @@ export function TraceLetter({ letter, tool, onComplete }: { letter: LetterSpec; 
         const stroke = data[i];
         const ratio = stroke && stroke.points.length > 1 ? (progress[i] ?? 0) / (stroke.points.length - 1) : 0;
         const color = fill ?? paint;
+        const inner = letter.widths?.[i] ?? 46;
         return (
           <g key={`tube-${i}`}>
             {/* black outline of the tube */}
@@ -141,7 +142,7 @@ export function TraceLetter({ letter, tool, onComplete }: { letter: LetterSpec; 
               d={d}
               fill="none"
               stroke="oklch(0.12 0 0)"
-              strokeWidth={56}
+              strokeWidth={inner + 10}
               strokeLinecap="round"
               strokeLinejoin="round"
             />
@@ -150,7 +151,7 @@ export function TraceLetter({ letter, tool, onComplete }: { letter: LetterSpec; 
               d={d}
               fill="none"
               stroke="var(--card)"
-              strokeWidth={46}
+              strokeWidth={inner}
               strokeLinecap="round"
               strokeLinejoin="round"
             />
@@ -160,7 +161,7 @@ export function TraceLetter({ letter, tool, onComplete }: { letter: LetterSpec; 
                 d={d}
                 fill="none"
                 stroke={color}
-                strokeWidth={46}
+                strokeWidth={inner}
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeDasharray={stroke.length}
