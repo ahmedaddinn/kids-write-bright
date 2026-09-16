@@ -130,46 +130,47 @@ export function TraceLetter({ letter, tool, onComplete }: { letter: LetterSpec; 
       onPointerCancel={stop}
       onPointerLeave={stop}
     >
+      {/* all black outlines first, so joined strokes read as one shape */}
+      {letter.strokes.map((d, i) => (
+        <path
+          key={`edge-${i}`}
+          d={d}
+          fill="none"
+          stroke="oklch(0.12 0 0)"
+          strokeWidth={(letter.widths?.[i] ?? 46) + 10}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      ))}
+      {letter.strokes.map((d, i) => (
+        <path
+          key={`inside-${i}`}
+          d={d}
+          fill="none"
+          stroke="var(--card)"
+          strokeWidth={letter.widths?.[i] ?? 46}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      ))}
       {letter.strokes.map((d, i) => {
         const stroke = data[i];
         const ratio = stroke && stroke.points.length > 1 ? (progress[i] ?? 0) / (stroke.points.length - 1) : 0;
         const color = fill ?? paint;
-        const inner = letter.widths?.[i] ?? 46;
+        if (!color || !stroke || stroke.length === 0) return null;
         return (
-          <g key={`tube-${i}`}>
-            {/* black outline of the tube */}
-            <path
-              d={d}
-              fill="none"
-              stroke="oklch(0.12 0 0)"
-              strokeWidth={inner + 10}
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            {/* empty inside of the tube */}
-            <path
-              d={d}
-              fill="none"
-              stroke="var(--card)"
-              strokeWidth={inner}
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            {/* the crayon ink, filling in behind the cursor */}
-            {color && stroke && stroke.length > 0 && (
-              <path
-                d={d}
-                fill="none"
-                stroke={color}
-                strokeWidth={inner}
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeDasharray={stroke.length}
-                strokeDashoffset={stroke.length * (1 - (fill ? 1 : ratio))}
-                className="transition-[stroke-dashoffset] duration-100 ease-linear"
-              />
-            )}
-          </g>
+          <path
+            key={`ink-${i}`}
+            d={d}
+            fill="none"
+            stroke={color}
+            strokeWidth={letter.widths?.[i] ?? 46}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeDasharray={stroke.length}
+            strokeDashoffset={stroke.length * (1 - (fill ? 1 : ratio))}
+            className="transition-[stroke-dashoffset] duration-100 ease-linear"
+          />
         );
       })}
 
