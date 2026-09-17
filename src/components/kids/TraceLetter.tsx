@@ -217,22 +217,25 @@ export function TraceLetter({ letter, tool, onComplete }: { letter: LetterSpec; 
           </g>
         );
       })}
-      {letter.dots?.map((dot, i) => (
-        <g key={`dot-${i}`}>
-          <circle cx={dot.cx} cy={dot.cy} r={20} fill={fill ?? "var(--card)"} stroke="oklch(0.12 0 0)" strokeWidth={6} />
-          {!fill && (
-            <circle
-              cx={dot.cx}
-              cy={dot.cy}
-              r={11}
-              fill="none"
-              stroke="oklch(0.18 0 0)"
-              strokeWidth={3}
-              strokeDasharray="7 7"
-            />
-          )}
-        </g>
-      ))}
+      {letter.dots?.map((dot, i) => {
+        const outer = letter.dotR ?? 20;
+        return (
+          <g key={`dot-${i}`}>
+            <circle cx={dot.cx} cy={dot.cy} r={outer} fill={fill ?? "var(--card)"} stroke="oklch(0.12 0 0)" strokeWidth={6} />
+            {!fill && (
+              <circle
+                cx={dot.cx}
+                cy={dot.cy}
+                r={outer * 0.55}
+                fill="none"
+                stroke="oklch(0.18 0 0)"
+                strokeWidth={3}
+                strokeDasharray="7 7"
+              />
+            )}
+          </g>
+        );
+      })}
     </svg>
   );
 }
