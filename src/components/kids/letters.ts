@@ -50,25 +50,32 @@ export const LETTERS: Record<string, LetterSpec> = {
   kaf: {
     id: "kaf",
     name: "كاف",
-    viewBox: "0 0 240 340",
+    viewBox: "0 0 352 598",
     strokes: [
-      "M170 60 L170 210 Q170 262 112 262 Q58 262 58 198",
-      "M92 168 L142 132",
+      // long descending stroke: down the right side, round the bottom bowl, up left
+      "M305 155 L305 350 Q305 425 190 425 Q57 425 57 305",
+      // the small zigzag hamza inside the bowl
+      "M215 255 L152 282 L205 318 L150 337",
     ],
+    widths: [46, 26],
   },
   lam: {
     id: "lam",
     name: "لام",
-    viewBox: "0 0 240 340",
-    strokes: ["M168 55 L168 205 Q168 262 112 262 Q58 262 58 190"],
+    viewBox: "0 0 293 593",
+    strokes: ["M247 95 L247 355 Q247 455 152 455 Q57 455 57 305"],
+    widths: [50],
   },
   meem: {
     id: "meem",
     name: "ميم",
-    viewBox: "0 0 240 340",
+    viewBox: "0 0 293 590",
     strokes: [
-      "M148 118 A38 38 0 1 1 147 118",
-      "M112 152 Q104 200 104 274",
+      // the round head, traced anti-clockwise from the left
+      "M105 258 C 98 148, 265 140, 265 238 C 265 318, 145 330, 106 268",
+      // the tail dropping straight down
+      "M96 288 Q62 300 62 458",
     ],
+    widths: [48, 48],
   },
 };
