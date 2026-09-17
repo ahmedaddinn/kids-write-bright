@@ -22,13 +22,13 @@ export const LETTERS: Record<string, LetterSpec> = {
     viewBox: "0 0 240 340",
     strokes: [
       // hamza: small curl, from the right over the top and back down-left
-      "M142 36 C 118 24, 92 34, 100 50 C 106 62, 126 60, 122 50",
+      "M154 30 C 118 12, 76 28, 88 52 C 98 70, 134 66, 128 50",
       // hamza base: short bar running to the left
-      "M136 70 L100 72",
+      "M148 92 L92 94",
       // the long stem, drawn top to bottom
-      "M118 124 L118 308",
+      "M118 140 L118 310",
     ],
-    widths: [20, 20, 48],
+    widths: [22, 22, 48],
   },
   baa: {
     id: "baa",
