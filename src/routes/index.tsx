@@ -33,20 +33,30 @@ export const Route = createFileRoute("/")({
 });
 
 const LETTER_LIST = [
-  LETTERS["alif"]!,
-  LETTERS["baa"]!,
-  LETTERS["taa"]!,
-  LETTERS["thaa"]!,
-  LETTERS["jim"]!,
-  LETTERS["haa"]!,
-  LETTERS["khaa"]!,
-  LETTERS["daal"]!,
-  LETTERS["thaal"]!,
-  LETTERS["raa"]!,
-  LETTERS["kaf"]!,
-  LETTERS["lam"]!,
-  LETTERS["meem"]!,
-];
+  "alif",
+  "baa",
+  "taa",
+  "thaa",
+  "jim",
+  "haa",
+  "khaa",
+  "daal",
+  "thaal",
+  "raa",
+  "zay",
+  "sin",
+  "shin",
+  "saad",
+  "daad",
+  "taah",
+  "thaah",
+  "ain",
+  "ghain",
+  "faa",
+  "kaf",
+  "lam",
+  "meem",
+].map((id) => LETTERS[id]!);
 
 function TracingPage() {
   const [tool, setTool] = useState<PaintTool>({ kind: "color", crayon: CRAYONS[0]! });
