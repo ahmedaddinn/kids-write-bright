@@ -36,8 +36,15 @@ const LETTER_LIST = [
   LETTERS["alif"]!,
   LETTERS["baa"]!,
   LETTERS["taa"]!,
-  LETTERS["lam"]!,
+  LETTERS["thaa"]!,
+  LETTERS["jim"]!,
+  LETTERS["haa"]!,
+  LETTERS["khaa"]!,
+  LETTERS["daal"]!,
+  LETTERS["thaal"]!,
+  LETTERS["raa"]!,
   LETTERS["kaf"]!,
+  LETTERS["lam"]!,
   LETTERS["meem"]!,
 ];
 
