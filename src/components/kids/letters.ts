@@ -25,9 +25,9 @@ export const LETTERS: Record<string, LetterSpec> = {
     viewBox: "0 0 347 597",
     strokes: [
       // hamza: small curl over the top, then back down to the left
-      "M180 46 C 126 38, 120 82, 160 88",
+      "M196 40 C 122 30, 116 84, 172 88",
       // hamza base bar, running to the left
-      "M188 122 L118 124",
+      "M196 142 L108 144",
       // the long stem, top to bottom
       "M163 212 L176 512",
     ],
