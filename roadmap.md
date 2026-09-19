@@ -8,3 +8,5 @@
 - [x] Match uploaded worksheet shapes for kaaf, lam, mim.
 - [x] Match uploaded worksheet shapes for alif, baa, taa, thaa and add jim, haa, khaa, daal, thaal, raa.
 - [x] Add zay, sin, shin, saad, daad, taah, thaah, ain, ghain, faa from the new worksheets.
+- [ ] Replace approximate letter paths with worksheet-calibrated geometry for all 28 letters.
+- [ ] Pixel-compare and verify tracing behavior for all worksheet letters.
