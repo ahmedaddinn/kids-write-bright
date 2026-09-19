@@ -53,9 +53,14 @@ const LETTER_LIST = [
   "ain",
   "ghain",
   "faa",
+  "qaf",
   "kaf",
   "lam",
   "meem",
+  "nun",
+  "hah",
+  "waw",
+  "yaa",
 ].map((id) => LETTERS[id]!);
 
 function TracingPage() {
