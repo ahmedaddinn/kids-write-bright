@@ -294,8 +294,8 @@ export const LETTERS: Record<string, LetterSpec> = {
     dots: [{ cx: 155, cy: 175 }],
     dotR: 26,
   },
-  haa: {
-    id: "haa",
+  hah: {
+    id: "hah",
     name: "هاء",
     viewBox: "0 0 361 587",
     strokes: [
